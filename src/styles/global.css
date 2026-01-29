@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Light mode defaults */
+  :root {
+    --color-bg: 250 250 250;
+    --color-surface: 255 255 255;
+    --color-text: 26 26 26;
+    --color-muted: 107 114 128;
+    --color-border: 229 231 235;
+    --color-accent: 37 99 235;
+  }
+
+  /* Dark mode */
+  .dark {
+    --color-bg: 17 17 17;
+    --color-surface: 26 26 26;
+    --color-text: 245 245 245;
+    --color-muted: 156 163 175;
+    --color-border: 45 45 45;
+    --color-accent: 96 165 250;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply bg-light-bg text-light-text font-sans antialiased;
+    @apply dark:bg-dark-bg dark:text-dark-text;
+  }
+
+  /* Typography */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif font-semibold tracking-tight;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl leading-tight;
+  }
+
+  h2 {
+    @apply text-2xl md:text-3xl leading-snug;
+  }
+
+  h3 {
+    @apply text-xl md:text-2xl leading-snug;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+
+  /* Links */
+  a {
+    @apply text-light-accent dark:text-dark-accent underline-offset-2 transition-colors;
+  }
+
+  a:hover {
+    @apply underline;
+  }
+
+  /* Focus states */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-light-accent dark:outline-dark-accent;
+  }
+}
+
+@layer components {
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  .container-prose {
+    @apply max-w-prose mx-auto px-6;
+  }
+
+  .container-wide {
+    @apply max-w-4xl mx-auto px-6;
+  }
+
+  .card {
+    @apply bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border rounded-lg p-6;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 font-medium rounded-lg transition-colors;
+    @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2;
+  }
+
+  .btn-primary {
+    @apply bg-light-accent text-white hover:bg-blue-700;
+    @apply dark:bg-dark-accent dark:text-dark-bg dark:hover:bg-blue-400;
+    @apply focus-visible:outline-light-accent dark:focus-visible:outline-dark-accent;
+  }
+
+  .btn-secondary {
+    @apply bg-light-surface text-light-text border border-light-border;
+    @apply hover:bg-gray-50;
+    @apply dark:bg-dark-surface dark:text-dark-text dark:border-dark-border;
+    @apply dark:hover:bg-gray-800;
+    @apply focus-visible:outline-light-accent dark:focus-visible:outline-dark-accent;
+  }
+
+  .input {
+    @apply w-full px-4 py-3 rounded-lg border border-light-border;
+    @apply bg-light-surface text-light-text placeholder:text-light-muted;
+    @apply dark:bg-dark-surface dark:text-dark-text dark:border-dark-border dark:placeholder:text-dark-muted;
+    @apply focus:outline-none focus:ring-2 focus:ring-light-accent dark:focus:ring-dark-accent;
+    @apply transition-colors;
+  }
+
+  .divider {
+    @apply border-t border-light-border dark:border-dark-border my-12 md:my-16;
+  }
+}

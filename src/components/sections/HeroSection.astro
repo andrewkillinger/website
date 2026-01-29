@@ -1,0 +1,47 @@
+---
+import { hero } from '../../content/siteContent';
+---
+
+<section id="home" class="section pt-24 md:pt-32">
+  <div class="container-prose">
+    <h1 class="mb-6">
+      {hero.greeting}
+    </h1>
+
+    <p class="text-xl md:text-2xl text-light-muted dark:text-dark-muted font-serif mb-8">
+      {hero.intro}
+    </p>
+
+    <div class="space-y-6 text-light-text/90 dark:text-dark-text/90">
+      <p>{hero.description[0]}</p>
+
+      <p>
+        I'm currently a Senior Director at{' '}
+        <a
+          href={hero.companies.acadia.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {hero.companies.acadia.name}
+        </a>, where I oversee corporate brand, digital platforms, and owned channels. Before that, I worked across agency and in-house roles at organizations including{' '}
+        <a
+          href={hero.companies.illumina.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {hero.companies.illumina.name}
+        </a>{' '}
+        and{' '}
+        <a
+          href={hero.companies.weberShandwick.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {hero.companies.weberShandwick.name}
+        </a>.
+      </p>
+
+      <p>{hero.description[2]}</p>
+    </div>
+  </div>
+</section>

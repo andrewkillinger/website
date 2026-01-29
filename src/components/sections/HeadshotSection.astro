@@ -1,0 +1,78 @@
+---
+import { headshot } from '../../content/siteContent';
+
+/**
+ * Headshot Section
+ *
+ * TODO: To add your headshot:
+ * 1. Place your high-resolution headshot image at: src/assets/headshot.jpg
+ *    (Supported formats: .jpg, .jpeg, .png, .webp)
+ * 2. Uncomment the image import below and the <Image> component
+ * 3. Comment out or remove the placeholder div
+ *
+ * Recommended image specifications:
+ * - Minimum size: 400x400 pixels
+ * - Aspect ratio: Square (1:1) works best
+ * - Format: JPEG or WebP for photos
+ */
+
+// TODO: Uncomment this line once you've added your headshot image:
+// import { Image } from 'astro:assets';
+// import headshotImage from '../../assets/headshot.jpg';
+---
+
+<section id="headshot" class="section bg-light-surface dark:bg-dark-surface">
+  <div class="container-prose">
+    <h2 class="mb-8">Headshot</h2>
+
+    <div class="flex flex-col items-center">
+      <!--
+        TODO: Once you've added your headshot image (src/assets/headshot.jpg),
+        uncomment the Image component below and remove the placeholder div.
+
+        <Image
+          src={headshotImage}
+          alt={headshot.alt}
+          width={320}
+          height={320}
+          class="rounded-lg shadow-sm w-full max-w-xs aspect-square object-cover"
+          loading="lazy"
+        />
+      -->
+
+      <!-- Placeholder: Remove this div once you add your actual headshot -->
+      <div
+        class="w-full max-w-xs aspect-square rounded-lg bg-light-border dark:bg-dark-border flex items-center justify-center"
+        role="img"
+        aria-label="Headshot placeholder - add your image to src/assets/headshot.jpg"
+      >
+        <div class="text-center p-6">
+          <svg
+            class="w-16 h-16 mx-auto mb-4 text-light-muted dark:text-dark-muted"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+            />
+          </svg>
+          <p class="text-sm text-light-muted dark:text-dark-muted">
+            Add headshot to<br />
+            <code class="text-xs">src/assets/headshot.jpg</code>
+          </p>
+        </div>
+      </div>
+
+      {headshot.caption && (
+        <p class="mt-4 text-sm text-light-muted dark:text-dark-muted text-center">
+          {headshot.caption}
+        </p>
+      )}
+    </div>
+  </div>
+</section>
