@@ -1,47 +1,51 @@
 ---
-import { hero } from '../../content/siteContent';
+import { hero, config } from '../../content/siteContent';
 ---
 
-<section id="home" class="section pt-24 md:pt-32">
-  <div class="container-prose">
-    <h1 class="mb-6">
-      {hero.greeting}
+<section id="home" class="pt-32 pb-16 md:pt-40 md:pb-24">
+  <div class="max-w-2xl mx-auto px-6">
+    <h1 class="text-4xl md:text-5xl font-serif font-semibold tracking-tight leading-tight mb-4">
+      {hero.name}
     </h1>
 
-    <p class="text-xl md:text-2xl text-light-muted dark:text-dark-muted font-serif mb-8">
+    <p class="text-lg text-light-muted dark:text-dark-muted mb-8">
+      {hero.role} at{' '}
+      <a
+        href={hero.company.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-light-muted dark:text-dark-muted underline underline-offset-2 decoration-light-border dark:decoration-dark-border hover:text-light-text dark:hover:text-dark-text hover:decoration-light-text dark:hover:decoration-dark-text transition-colors"
+      >
+        {hero.company.name}
+      </a>
+    </p>
+
+    <p class="text-light-text/85 dark:text-dark-text/85 leading-relaxed text-base">
       {hero.intro}
     </p>
 
-    <div class="space-y-6 text-light-text/90 dark:text-dark-text/90">
-      <p>{hero.description[0]}</p>
-
-      <p>
-        I'm currently a Senior Director at{' '}
-        <a
-          href={hero.companies.acadia.url}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {hero.companies.acadia.name}
-        </a>, where I oversee corporate brand, digital platforms, and owned channels. Before that, I worked across agency and in-house roles at organizations including{' '}
-        <a
-          href={hero.companies.illumina.url}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {hero.companies.illumina.name}
-        </a>{' '}
-        and{' '}
-        <a
-          href={hero.companies.weberShandwick.url}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {hero.companies.weberShandwick.name}
-        </a>.
-      </p>
-
-      <p>{hero.description[2]}</p>
+    <div class="flex items-center gap-4 mt-8">
+      <a
+        href={config.linkedIn}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 text-sm font-medium text-light-text dark:text-dark-text no-underline hover:text-light-accent dark:hover:text-dark-accent transition-colors"
+      >
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+        LinkedIn
+      </a>
+      <span class="text-light-border dark:text-dark-border">|</span>
+      <a
+        href={`mailto:${config.email}`}
+        class="inline-flex items-center gap-2 text-sm font-medium text-light-text dark:text-dark-text no-underline hover:text-light-accent dark:hover:text-dark-accent transition-colors"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+        Email
+      </a>
     </div>
   </div>
 </section>

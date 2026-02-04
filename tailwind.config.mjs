@@ -9,33 +9,21 @@ export default {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
-        // Light mode
         light: {
-          bg: '#FAFAFA',
+          bg: '#FCFCFC',
           surface: '#FFFFFF',
-          text: '#1A1A1A',
-          muted: '#6B7280',
-          border: '#E5E7EB',
+          text: '#171717',
+          muted: '#737373',
+          border: '#EBEBEB',
           accent: '#2563EB',
         },
-        // Dark mode
         dark: {
-          bg: '#111111',
-          surface: '#1A1A1A',
+          bg: '#0F0F0F',
+          surface: '#171717',
           text: '#F5F5F5',
-          muted: '#9CA3AF',
-          border: '#2D2D2D',
+          muted: '#A3A3A3',
+          border: '#262626',
           accent: '#60A5FA',
-        },
-      },
-      maxWidth: {
-        prose: '65ch',
-      },
-      typography: {
-        DEFAULT: {
-          css: {
-            maxWidth: '65ch',
-          },
         },
       },
     },
