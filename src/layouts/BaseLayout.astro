@@ -44,6 +44,20 @@ const canonicalURL = new URL(Astro.url.pathname, config.site.url);
 
     <script type="application/ld+json" set:html={JSON.stringify(seo.jsonLd)} />
 
+    <!-- Critical inline styles for base layout resilience -->
+    <style is:inline>
+      body {
+        margin: 0;
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        color: #171717;
+        background: #FCFCFC;
+        -webkit-font-smoothing: antialiased;
+      }
+      .dark body { background: #0F0F0F; color: #F5F5F5; }
+      svg { flex-shrink: 0; }
+      svg:not(:root) { overflow: hidden; }
+    </style>
+
     <script is:inline>
       (function() {
         const stored = localStorage.getItem('theme');
