@@ -46,11 +46,17 @@
   }
 
   a {
-    @apply text-light-accent dark:text-dark-accent underline-offset-2 transition-colors;
+    @apply underline-offset-2 transition-colors;
+    color: inherit;
   }
 
   a:hover {
     @apply underline;
+  }
+
+  /* Only apply accent color to links within prose content */
+  p a, li a, .prose a {
+    @apply text-light-accent dark:text-dark-accent;
   }
 
   :focus-visible {
