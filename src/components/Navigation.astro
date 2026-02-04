@@ -1,115 +1,27 @@
 ---
-import { navigation, config } from '../content/siteContent';
+import { navigation } from '../content/siteContent';
 import ThemeToggle from './ThemeToggle.astro';
 ---
 
-<header class="sticky top-0 z-40 bg-light-bg/95 dark:bg-dark-bg/95 backdrop-blur-sm border-b border-light-border dark:border-dark-border">
-  <nav class="container-wide" aria-label="Main navigation">
-    <div class="flex items-center justify-between h-16">
-      <!-- Logo / Name -->
-      <a
-        href="#home"
-        class="font-serif font-semibold text-lg text-light-text dark:text-dark-text no-underline hover:no-underline"
-      >
-        Andrew Killinger
-      </a>
-
-      <!-- Desktop Navigation -->
-      <div class="hidden lg:flex items-center gap-6">
-        {navigation.map((item) => (
-          <a
-            href={item.href}
-            class="text-sm text-light-muted dark:text-dark-muted hover:text-light-text dark:hover:text-dark-text no-underline transition-colors"
-          >
-            {item.label}
-          </a>
-        ))}
-        <ThemeToggle />
-      </div>
-
-      <!-- Mobile Navigation Toggle -->
-      <div class="flex items-center gap-4 lg:hidden">
-        <ThemeToggle />
-        <button
-          type="button"
-          id="mobile-menu-button"
-          class="p-2 text-light-muted dark:text-dark-muted hover:text-light-text dark:hover:text-dark-text"
-          aria-expanded="false"
-          aria-controls="mobile-menu"
-          aria-label="Toggle navigation menu"
-        >
-          <svg
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"
-              class="menu-open"
-            />
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-              class="menu-close hidden"
-            />
-          </svg>
-        </button>
-      </div>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div
-      id="mobile-menu"
-      class="hidden lg:hidden pb-4"
-      role="navigation"
-      aria-label="Mobile navigation"
+<header class="fixed top-0 left-0 right-0 z-40 bg-light-bg/80 dark:bg-dark-bg/80 backdrop-blur-md">
+  <nav class="max-w-2xl mx-auto px-6 h-14 flex items-center justify-between" aria-label="Main navigation">
+    <a
+      href="#"
+      class="font-serif font-semibold text-light-text dark:text-dark-text no-underline hover:no-underline tracking-tight"
     >
-      <div class="flex flex-col gap-3 pt-4 border-t border-light-border dark:border-dark-border">
-        {navigation.map((item) => (
-          <a
-            href={item.href}
-            class="text-light-muted dark:text-dark-muted hover:text-light-text dark:hover:text-dark-text no-underline py-2 transition-colors mobile-nav-link"
-          >
-            {item.label}
-          </a>
-        ))}
-      </div>
+      AK
+    </a>
+
+    <div class="flex items-center gap-6">
+      {navigation.map((item) => (
+        <a
+          href={item.href}
+          class="text-sm text-light-muted dark:text-dark-muted hover:text-light-text dark:hover:text-dark-text no-underline transition-colors"
+        >
+          {item.label}
+        </a>
+      ))}
+      <ThemeToggle />
     </div>
   </nav>
 </header>
-
-<script>
-  const menuButton = document.getElementById('mobile-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const menuOpenIcon = document.querySelector('.menu-open');
-  const menuCloseIcon = document.querySelector('.menu-close');
-
-  if (menuButton && mobileMenu && menuOpenIcon && menuCloseIcon) {
-    menuButton.addEventListener('click', () => {
-      const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
-
-      menuButton.setAttribute('aria-expanded', String(!isExpanded));
-      mobileMenu.classList.toggle('hidden');
-      menuOpenIcon.classList.toggle('hidden');
-      menuCloseIcon.classList.toggle('hidden');
-    });
-
-    // Close menu when clicking a link
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-    mobileNavLinks.forEach((link) => {
-      link.addEventListener('click', () => {
-        menuButton.setAttribute('aria-expanded', 'false');
-        mobileMenu.classList.add('hidden');
-        menuOpenIcon.classList.remove('hidden');
-        menuCloseIcon.classList.add('hidden');
-      });
-    });
-  }
-</script>

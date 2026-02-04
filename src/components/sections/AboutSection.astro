@@ -1,0 +1,46 @@
+---
+import { about } from '../../content/siteContent';
+---
+
+<section id="about" class="py-16 md:py-24">
+  <div class="max-w-2xl mx-auto px-6">
+
+    <!-- Background -->
+    <h2 class="text-sm font-medium uppercase tracking-widest text-light-muted dark:text-dark-muted mb-8">
+      {about.background.heading}
+    </h2>
+
+    <div class="space-y-5 text-light-text/85 dark:text-dark-text/85 leading-relaxed mb-16">
+      {about.background.paragraphs.map((paragraph) => (
+        <p set:html={paragraph} />
+      ))}
+    </div>
+
+    <!-- Focus Areas -->
+    <h2 class="text-sm font-medium uppercase tracking-widest text-light-muted dark:text-dark-muted mb-8">
+      {about.focus.heading}
+    </h2>
+
+    <ul class="space-y-3 mb-6">
+      {about.focus.areas.map((area) => (
+        <li class="flex items-start gap-3 text-light-text/85 dark:text-dark-text/85">
+          <span class="block w-1.5 h-1.5 rounded-full bg-light-muted dark:bg-dark-muted mt-2 shrink-0" />
+          {area}
+        </li>
+      ))}
+    </ul>
+
+    <p class="text-light-muted dark:text-dark-muted italic mb-16">
+      {about.focus.closing}
+    </p>
+
+    <!-- Personal -->
+    <h2 class="text-sm font-medium uppercase tracking-widest text-light-muted dark:text-dark-muted mb-8">
+      {about.personal.heading}
+    </h2>
+
+    <p class="text-light-text/85 dark:text-dark-text/85 leading-relaxed">
+      {about.personal.paragraph}
+    </p>
+  </div>
+</section>
