@@ -1,12 +1,745 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import HeroSection from '../components/sections/HeroSection.astro';
-import AboutSection from '../components/sections/AboutSection.astro';
-import ContactSection from '../components/sections/ContactSection.astro';
+const NAME = 'ANDREW KILLINGER';
+const TAGLINE = 'corporate brand // digital comms';
+const LOCATION = 'southern california';
+const EMAIL = 'Andrew.killinger@gmail.com';
+const LINKEDIN = 'https://www.linkedin.com/in/killinger';
+const COMPANY = 'Acadia Pharmaceuticals';
 ---
 
-<BaseLayout>
-  <HeroSection />
-  <AboutSection />
-  <ContactSection />
-</BaseLayout>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0a0a16" />
+    <meta name="description" content="Andrew Killinger — corporate brand and digital communications. A retro-modern personal site." />
+    <meta name="author" content="Andrew Killinger" />
+    <link rel="canonical" href="https://andrewkillinger.com/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://andrewkillinger.com/" />
+    <meta property="og:title" content="ANDREW KILLINGER ✦" />
+    <meta property="og:description" content="A retro-cool corner of the internet." />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:wght@400;700&family=Major+Mono+Display&display=swap" rel="stylesheet" />
+
+    <title>ANDREW KILLINGER ✦ a retro corner of the web</title>
+
+    <style is:global>
+      :root {
+        --bg: #0a0a16;
+        --bg-2: #14142b;
+        --ink: #f5e6d3;
+        --magenta: #ff2bd6;
+        --cyan: #00f0ff;
+        --lime: #c6ff3d;
+        --violet: #8b5cf6;
+        --orange: #ff7a3d;
+        --shadow: 0 0 24px rgba(255, 43, 214, 0.45), 0 0 48px rgba(0, 240, 255, 0.25);
+      }
+
+      * { box-sizing: border-box; }
+
+      html, body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: 'Space Mono', ui-monospace, Menlo, monospace;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+        min-height: 100%;
+      }
+
+      body {
+        min-height: 100dvh;
+        position: relative;
+        padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      }
+
+      a { color: var(--cyan); text-decoration: none; }
+      a:hover, a:focus { color: var(--lime); }
+      button { font-family: inherit; }
+
+      /* ===== Synthwave grid background ===== */
+      .grid-bg {
+        position: fixed;
+        inset: 0;
+        z-index: -3;
+        background:
+          radial-gradient(ellipse at 50% 0%, #2a1257 0%, #0a0a16 55%, #050510 100%);
+        overflow: hidden;
+      }
+      .grid-bg::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -10%;
+        width: 220vmax;
+        height: 75vh;
+        transform: translateX(-50%) perspective(40vh) rotateX(58deg);
+        background-image:
+          linear-gradient(to right, rgba(255, 43, 214, 0.55) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(0, 240, 255, 0.55) 1px, transparent 1px);
+        background-size: 6vmin 6vmin;
+        animation: grid-scroll 6s linear infinite;
+        mask-image: linear-gradient(to bottom, transparent 0%, #000 30%, #000 100%);
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 30%, #000 100%);
+      }
+      .grid-bg::after {
+        /* Sun */
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 18%;
+        width: 56vmin;
+        height: 56vmin;
+        max-width: 420px;
+        max-height: 420px;
+        transform: translate(-50%, 0);
+        border-radius: 50%;
+        background: linear-gradient(180deg, #ff7a3d 0%, #ff2bd6 50%, #8b5cf6 100%);
+        box-shadow: 0 0 80px rgba(255, 43, 214, 0.6), 0 0 160px rgba(139, 92, 246, 0.4);
+        opacity: 0.85;
+        z-index: -1;
+      }
+      @keyframes grid-scroll {
+        from { background-position: 0 0; }
+        to   { background-position: 0 6vmin; }
+      }
+
+      /* Sun stripes */
+      .sun-stripes {
+        position: fixed;
+        left: 50%;
+        top: 18%;
+        width: 56vmin;
+        height: 56vmin;
+        max-width: 420px;
+        max-height: 420px;
+        transform: translate(-50%, 0);
+        z-index: -2;
+        pointer-events: none;
+        clip-path: circle(50% at 50% 50%);
+      }
+      .sun-stripes::before {
+        content: '';
+        position: absolute;
+        inset: 50% 0 0 0;
+        background: repeating-linear-gradient(
+          to bottom,
+          transparent 0,
+          transparent 6%,
+          var(--bg) 6%,
+          var(--bg) 9%
+        );
+      }
+
+      /* ===== CRT scanlines + flicker ===== */
+      .scanlines {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        pointer-events: none;
+        background: repeating-linear-gradient(
+          to bottom,
+          rgba(255,255,255,0.04) 0px,
+          rgba(255,255,255,0.04) 1px,
+          transparent 1px,
+          transparent 3px
+        );
+        mix-blend-mode: overlay;
+      }
+      .vignette {
+        position: fixed;
+        inset: 0;
+        z-index: 51;
+        pointer-events: none;
+        background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.55) 100%);
+      }
+      .flicker {
+        animation: flicker 6s infinite;
+      }
+      @keyframes flicker {
+        0%, 96%, 100% { opacity: 1; }
+        97% { opacity: 0.85; }
+        98% { opacity: 1; }
+        99% { opacity: 0.92; }
+      }
+
+      /* ===== CRT off state ===== */
+      body.crt-off .grid-bg,
+      body.crt-off .sun-stripes,
+      body.crt-off main,
+      body.crt-off .marquee-wrap,
+      body.crt-off .footer-bar { opacity: 0; transition: opacity 80ms ease-out; }
+      body.crt-off .crt-line {
+        position: fixed; left: 0; right: 0; top: 50%;
+        height: 2px; background: var(--ink); box-shadow: 0 0 12px var(--ink);
+        z-index: 100; animation: crtLine 0.9s ease-out forwards;
+      }
+      @keyframes crtLine {
+        0%   { transform: scaleY(40); opacity: 0; }
+        20%  { transform: scaleY(40); opacity: 1; }
+        100% { transform: scaleY(1); opacity: 0; }
+      }
+
+      /* ===== Layout ===== */
+      .marquee-wrap {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        background: var(--magenta);
+        color: var(--bg);
+        border-bottom: 2px solid var(--cyan);
+        overflow: hidden;
+        font-family: 'VT323', monospace;
+        font-size: 22px;
+        line-height: 1;
+      }
+      .marquee {
+        display: inline-block;
+        white-space: nowrap;
+        padding: 8px 0;
+        animation: marquee 22s linear infinite;
+        will-change: transform;
+      }
+      .marquee span { padding: 0 1.25rem; }
+      @keyframes marquee {
+        from { transform: translateX(0); }
+        to   { transform: translateX(-50%); }
+      }
+
+      main {
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 5vh 5vw 12vh;
+        position: relative;
+        z-index: 1;
+      }
+
+      .badge {
+        width: min(560px, 100%);
+        padding: clamp(20px, 5vw, 36px);
+        background: rgba(20, 20, 43, 0.78);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 2px solid var(--cyan);
+        border-radius: 14px;
+        box-shadow: var(--shadow);
+        position: relative;
+      }
+      .badge::before, .badge::after {
+        content: '';
+        position: absolute;
+        width: 14px; height: 14px;
+        border: 2px solid var(--magenta);
+        background: var(--bg);
+      }
+      .badge::before { top: -8px; left: -8px; }
+      .badge::after  { bottom: -8px; right: -8px; }
+
+      .greeting {
+        font-family: 'VT323', monospace;
+        font-size: 20px;
+        color: var(--lime);
+        letter-spacing: 0.05em;
+        margin: 0 0 6px;
+      }
+      .greeting .cursor {
+        display: inline-block; width: 0.5em; background: var(--lime);
+        animation: blink 1s steps(1) infinite; color: transparent;
+      }
+      @keyframes blink { 50% { opacity: 0; } }
+
+      h1.name {
+        font-family: 'Major Mono Display', 'VT323', monospace;
+        font-size: clamp(32px, 9vw, 56px);
+        line-height: 1;
+        margin: 6px 0 14px;
+        color: var(--ink);
+        text-shadow:
+          2px 0 var(--magenta),
+          -2px 0 var(--cyan);
+        cursor: pointer;
+        user-select: none;
+        word-break: break-word;
+      }
+      h1.name.glitch { animation: glitch 0.4s steps(2) 3; }
+      @keyframes glitch {
+        0%   { text-shadow:  2px 0 var(--magenta), -2px 0 var(--cyan); transform: translate(0,0); }
+        25%  { text-shadow: -3px 0 var(--lime),    3px 0 var(--magenta); transform: translate(1px,-1px); }
+        50%  { text-shadow:  3px 0 var(--cyan),   -3px 0 var(--orange); transform: translate(-2px,1px); }
+        75%  { text-shadow: -2px 0 var(--violet),  2px 0 var(--lime); transform: translate(2px,2px); }
+        100% { text-shadow:  2px 0 var(--magenta), -2px 0 var(--cyan); transform: translate(0,0); }
+      }
+
+      .tagline {
+        font-family: 'VT323', monospace;
+        font-size: clamp(18px, 4.5vw, 22px);
+        color: var(--cyan);
+        margin: 0 0 4px;
+        letter-spacing: 0.02em;
+      }
+      .meta {
+        font-size: 12px;
+        color: rgba(245, 230, 211, 0.65);
+        margin: 0 0 18px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+      .meta b { color: var(--lime); font-weight: 400; }
+
+      .button-row {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-top: 18px;
+      }
+      @media (min-width: 460px) {
+        .button-row { grid-template-columns: 1fr 1fr 1fr; }
+      }
+
+      .pixel-btn {
+        appearance: none;
+        border: 2px solid var(--ink);
+        background: var(--bg-2);
+        color: var(--ink);
+        padding: 14px 14px;
+        font-family: 'VT323', monospace;
+        font-size: 22px;
+        letter-spacing: 0.06em;
+        cursor: pointer;
+        box-shadow: 4px 4px 0 var(--magenta);
+        transition: transform 80ms ease, box-shadow 80ms ease, background 120ms;
+        text-transform: uppercase;
+        min-height: 48px;
+        touch-action: manipulation;
+      }
+      .pixel-btn:hover, .pixel-btn:focus-visible {
+        background: var(--magenta);
+        color: var(--bg);
+        outline: none;
+        box-shadow: 4px 4px 0 var(--cyan);
+      }
+      .pixel-btn:active {
+        transform: translate(4px, 4px);
+        box-shadow: 0 0 0 var(--cyan);
+      }
+      .pixel-btn[data-kind="contact"]  { box-shadow: 4px 4px 0 var(--cyan); }
+      .pixel-btn[data-kind="contact"]:hover { background: var(--cyan); box-shadow: 4px 4px 0 var(--magenta); }
+      .pixel-btn[data-kind="secrets"]  { box-shadow: 4px 4px 0 var(--lime); }
+      .pixel-btn[data-kind="secrets"]:hover { background: var(--lime); box-shadow: 4px 4px 0 var(--magenta); }
+
+      /* ===== Status bar / footer ===== */
+      .footer-bar {
+        position: fixed;
+        left: 0; right: 0; bottom: 0;
+        z-index: 25;
+        background: rgba(10, 10, 22, 0.85);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        border-top: 1px solid rgba(0, 240, 255, 0.4);
+        font-family: 'VT323', monospace;
+        font-size: 16px;
+        color: var(--cyan);
+        padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: center;
+      }
+      .footer-bar .left { display: flex; gap: 12px; align-items: center; }
+      .footer-bar .dot {
+        width: 8px; height: 8px; background: var(--lime); border-radius: 50%;
+        box-shadow: 0 0 8px var(--lime);
+        animation: pulse 1.6s ease-in-out infinite;
+      }
+      @keyframes pulse { 50% { opacity: 0.35; } }
+      .power {
+        appearance: none;
+        background: transparent;
+        color: var(--magenta);
+        border: 1px solid var(--magenta);
+        padding: 4px 10px;
+        font-family: 'VT323', monospace;
+        font-size: 16px;
+        cursor: pointer;
+        min-height: 32px;
+      }
+      .power:hover { background: var(--magenta); color: var(--bg); }
+
+      /* ===== Modal ===== */
+      .modal-back {
+        position: fixed;
+        inset: 0;
+        background: rgba(5, 5, 16, 0.78);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        z-index: 60;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        animation: fade 180ms ease;
+      }
+      .modal-back[data-open="true"] { display: flex; }
+      @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+      .modal {
+        width: min(540px, 100%);
+        max-height: 86dvh;
+        overflow-y: auto;
+        background: var(--bg-2);
+        border: 2px solid var(--cyan);
+        box-shadow: var(--shadow);
+        border-radius: 12px;
+        padding: 22px 22px 26px;
+        position: relative;
+        animation: pop 220ms cubic-bezier(.2,.9,.3,1.4);
+      }
+      @keyframes pop { from { transform: scale(0.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+      .modal h2 {
+        font-family: 'Major Mono Display', monospace;
+        font-size: 24px;
+        margin: 0 0 10px;
+        color: var(--magenta);
+        letter-spacing: 0.04em;
+      }
+      .modal p, .modal li { font-size: 15px; line-height: 1.55; color: var(--ink); }
+      .modal ul { padding-left: 18px; margin: 8px 0; }
+      .modal .close {
+        position: absolute; top: 8px; right: 10px;
+        background: transparent; border: none; color: var(--lime);
+        font-family: 'VT323', monospace; font-size: 24px; cursor: pointer;
+        min-width: 36px; min-height: 36px;
+      }
+      .kbd {
+        display: inline-block;
+        font-family: 'VT323', monospace;
+        font-size: 14px;
+        padding: 1px 6px;
+        background: #000;
+        color: var(--lime);
+        border: 1px solid var(--lime);
+        border-radius: 3px;
+        margin: 0 2px;
+      }
+
+      /* ===== Floating pixel rain (easter egg) ===== */
+      .rain-pixel {
+        position: fixed;
+        top: -20px;
+        width: 10px; height: 10px;
+        z-index: 80;
+        pointer-events: none;
+        animation: fall linear forwards;
+      }
+      @keyframes fall {
+        to { transform: translateY(110vh) rotate(360deg); opacity: 0.2; }
+      }
+
+      /* ===== Rainbow mode (Konami) ===== */
+      body.rainbow .badge { animation: rb-border 1.4s linear infinite; }
+      body.rainbow h1.name { animation: rb-text 1s linear infinite; }
+      @keyframes rb-border {
+        0%   { border-color: var(--magenta); box-shadow: 0 0 20px var(--magenta); }
+        25%  { border-color: var(--cyan);    box-shadow: 0 0 20px var(--cyan); }
+        50%  { border-color: var(--lime);    box-shadow: 0 0 20px var(--lime); }
+        75%  { border-color: var(--orange);  box-shadow: 0 0 20px var(--orange); }
+        100% { border-color: var(--magenta); box-shadow: 0 0 20px var(--magenta); }
+      }
+      @keyframes rb-text {
+        0%   { color: var(--magenta); }
+        25%  { color: var(--cyan); }
+        50%  { color: var(--lime); }
+        75%  { color: var(--orange); }
+        100% { color: var(--magenta); }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .grid-bg::before, .marquee, .greeting .cursor, .footer-bar .dot,
+        body.rainbow .badge, body.rainbow h1.name, .flicker { animation: none !important; }
+      }
+    </style>
+  </head>
+
+  <body class="flicker">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="sun-stripes" aria-hidden="true"></div>
+
+    <div class="marquee-wrap" aria-hidden="true">
+      <div class="marquee">
+        <span>★ {NAME} ★ {TAGLINE} ★ welcome to the back rooms of the internet ★ press ↑↑↓↓←→←→ b a ★</span>
+        <span>★ {NAME} ★ {TAGLINE} ★ welcome to the back rooms of the internet ★ press ↑↑↓↓←→←→ b a ★</span>
+      </div>
+    </div>
+
+    <main id="main">
+      <section class="badge" aria-labelledby="name">
+        <p class="greeting" id="greeting">> hello world<span class="cursor">_</span></p>
+        <h1 class="name" id="name" tabindex="0">{NAME}</h1>
+        <p class="tagline">{TAGLINE}</p>
+        <p class="meta">
+          <b>loc</b> {LOCATION} &nbsp;//&nbsp; <b>day job</b> {COMPANY}
+        </p>
+
+        <div class="button-row">
+          <button class="pixel-btn" data-kind="about"   data-open-modal="about">about</button>
+          <button class="pixel-btn" data-kind="contact" data-open-modal="contact">contact</button>
+          <button class="pixel-btn" data-kind="secrets" data-open-modal="secrets">secrets</button>
+        </div>
+      </section>
+    </main>
+
+    <div class="scanlines" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <footer class="footer-bar" aria-label="status">
+      <div class="left">
+        <span class="dot" aria-hidden="true"></span>
+        <span id="clock">--:--:--</span>
+        <span style="opacity:.6">|</span>
+        <span style="color:var(--ink)">© andrew killinger</span>
+      </div>
+      <button class="power" id="power" aria-label="power off">⏻ off</button>
+    </footer>
+
+    <!-- ABOUT -->
+    <div class="modal-back" data-modal="about" role="dialog" aria-modal="true" aria-labelledby="m-about-h">
+      <div class="modal">
+        <button class="close" data-close aria-label="close">[ x ]</button>
+        <h2 id="m-about-h">// about</h2>
+        <p>
+          Hi, I'm Andrew. I help organizations explain who they are — especially during
+          moments of change. My day job lives at the intersection of corporate narrative,
+          digital platforms, and internal alignment.
+        </p>
+        <p>
+          I started agency-side, moved in-house at <a href="https://illumina.com" target="_blank" rel="noopener">Illumina</a>,
+          and now lead corporate brand & digital comms at
+          <a href="https://acadia.com" target="_blank" rel="noopener">Acadia Pharmaceuticals</a>.
+        </p>
+        <p>
+          Beyond the day job: husband, dad of two daughters, southern california resident,
+          chronic tinkerer of small fun things on the internet (like this).
+        </p>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="modal-back" data-modal="contact" role="dialog" aria-modal="true" aria-labelledby="m-contact-h">
+      <div class="modal">
+        <button class="close" data-close aria-label="close">[ x ]</button>
+        <h2 id="m-contact-h">// contact</h2>
+        <p>The best ways to reach me:</p>
+        <ul>
+          <li>email &nbsp;→&nbsp; <a id="email-link" href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
+          <li>linkedin &nbsp;→&nbsp; <a href={LINKEDIN} target="_blank" rel="noopener">/in/killinger</a></li>
+        </ul>
+        <p style="margin-top:14px; color: var(--lime); font-size: 13px;">
+          (no forms. no funnels. just say hi.)
+        </p>
+      </div>
+    </div>
+
+    <!-- SECRETS -->
+    <div class="modal-back" data-modal="secrets" role="dialog" aria-modal="true" aria-labelledby="m-secrets-h">
+      <div class="modal">
+        <button class="close" data-close aria-label="close">[ x ]</button>
+        <h2 id="m-secrets-h">// secrets</h2>
+        <p>This site is a playground. Things to try:</p>
+        <ul>
+          <li>tap or click my <b>name</b> for a glitch + a beep</li>
+          <li>tap the name <b>five times</b> for pixel rain</li>
+          <li>type the konami code:
+            <span class="kbd">↑</span><span class="kbd">↑</span><span class="kbd">↓</span><span class="kbd">↓</span><span class="kbd">←</span><span class="kbd">→</span><span class="kbd">←</span><span class="kbd">→</span><span class="kbd">B</span><span class="kbd">A</span>
+          </li>
+          <li><b>long-press</b> the name (1 second) for a hidden message</li>
+          <li>open your browser <b>console</b> for a love note</li>
+          <li>hit the <b>⏻ off</b> button to power down the CRT</li>
+        </ul>
+        <p style="color:var(--cyan); font-size:13px; margin-top:14px;">
+          best experienced with sound on. 🔊
+        </p>
+      </div>
+    </div>
+
+    <script is:inline>
+      // ===== sound (WebAudio synth, no assets) =====
+      let actx = null;
+      let muted = false;
+      function ac() {
+        if (muted) return null;
+        if (!actx) {
+          try { actx = new (window.AudioContext || window.webkitAudioContext)(); }
+          catch (e) { return null; }
+        }
+        if (actx.state === 'suspended') actx.resume();
+        return actx;
+      }
+      function beep(freq, dur, type, vol) {
+        const c = ac(); if (!c) return;
+        const o = c.createOscillator();
+        const g = c.createGain();
+        o.type = type || 'square';
+        o.frequency.value = freq;
+        g.gain.value = vol == null ? 0.06 : vol;
+        o.connect(g).connect(c.destination);
+        const t = c.currentTime;
+        g.gain.setValueAtTime(g.gain.value, t);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+        o.start(t);
+        o.stop(t + dur);
+      }
+      function chord(freqs, dur, type) {
+        freqs.forEach((f, i) => setTimeout(() => beep(f, dur, type, 0.05), i * 70));
+      }
+
+      // ===== greeting by time of day =====
+      (function () {
+        const h = new Date().getHours();
+        const g = document.getElementById('greeting');
+        let msg = '> hello world';
+        if (h < 5)       msg = '> burning the midnight oil';
+        else if (h < 12) msg = '> good morning, traveler';
+        else if (h < 17) msg = '> good afternoon';
+        else if (h < 21) msg = '> good evening';
+        else             msg = '> nighthawk mode engaged';
+        g.firstChild.textContent = msg;
+      })();
+
+      // ===== clock =====
+      function tickClock() {
+        const d = new Date();
+        const pad = n => String(n).padStart(2, '0');
+        document.getElementById('clock').textContent =
+          pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+      }
+      tickClock();
+      setInterval(tickClock, 1000);
+
+      // ===== modal handling =====
+      const modals = document.querySelectorAll('.modal-back');
+      function openModal(name) {
+        modals.forEach(m => m.dataset.open = (m.dataset.modal === name) ? 'true' : 'false');
+        chord([523.25, 659.25, 783.99], 0.12, 'square');
+      }
+      function closeModals() {
+        modals.forEach(m => m.dataset.open = 'false');
+        beep(440, 0.08, 'sine');
+      }
+      document.querySelectorAll('[data-open-modal]').forEach(btn => {
+        btn.addEventListener('click', () => openModal(btn.dataset.openModal));
+        btn.addEventListener('mouseenter', () => beep(880, 0.04, 'square', 0.03));
+      });
+      document.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', closeModals));
+      modals.forEach(m => m.addEventListener('click', e => { if (e.target === m) closeModals(); }));
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModals(); });
+
+      // ===== name interactions: glitch, click counter, long-press =====
+      const name = document.getElementById('name');
+      let clicks = 0, clickTimer = null, pressTimer = null;
+      function glitchName() {
+        name.classList.remove('glitch');
+        void name.offsetWidth;
+        name.classList.add('glitch');
+        beep(220 + Math.random() * 400, 0.08, 'sawtooth', 0.05);
+      }
+      name.addEventListener('click', () => {
+        glitchName();
+        clicks++;
+        clearTimeout(clickTimer);
+        clickTimer = setTimeout(() => clicks = 0, 1200);
+        if (clicks >= 5) {
+          clicks = 0;
+          pixelRain(60);
+          chord([523, 659, 784, 1046], 0.18, 'triangle');
+        }
+      });
+      name.addEventListener('mouseenter', () => beep(660, 0.04, 'square', 0.03));
+
+      const startPress = () => {
+        clearTimeout(pressTimer);
+        pressTimer = setTimeout(() => {
+          alert('built with caffeine, css, and a little nostalgia. — ak');
+          beep(180, 0.4, 'sine', 0.07);
+        }, 1000);
+      };
+      const endPress = () => clearTimeout(pressTimer);
+      name.addEventListener('mousedown', startPress);
+      name.addEventListener('touchstart', startPress, { passive: true });
+      ['mouseup','mouseleave','touchend','touchcancel'].forEach(e =>
+        name.addEventListener(e, endPress));
+
+      // ===== pixel rain =====
+      const PIX_COLORS = ['#ff2bd6', '#00f0ff', '#c6ff3d', '#ff7a3d', '#8b5cf6'];
+      function pixelRain(count) {
+        for (let i = 0; i < count; i++) {
+          const p = document.createElement('div');
+          p.className = 'rain-pixel';
+          p.style.left = (Math.random() * 100) + 'vw';
+          p.style.background = PIX_COLORS[i % PIX_COLORS.length];
+          p.style.animationDuration = (1.5 + Math.random() * 2) + 's';
+          p.style.animationDelay = (Math.random() * 0.6) + 's';
+          p.style.width = p.style.height = (6 + Math.floor(Math.random() * 8)) + 'px';
+          document.body.appendChild(p);
+          setTimeout(() => p.remove(), 4500);
+        }
+      }
+
+      // ===== konami =====
+      const KONAMI = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+      let kIdx = 0;
+      document.addEventListener('keydown', e => {
+        const k = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+        if (k === KONAMI[kIdx]) {
+          kIdx++;
+          if (kIdx === KONAMI.length) {
+            kIdx = 0;
+            document.body.classList.toggle('rainbow');
+            pixelRain(120);
+            chord([392, 523, 659, 784, 1046, 1318], 0.2, 'triangle');
+          }
+        } else { kIdx = 0; }
+      });
+
+      // ===== power (CRT off) =====
+      const power = document.getElementById('power');
+      power.addEventListener('click', () => {
+        if (document.body.classList.contains('crt-off')) {
+          document.body.classList.remove('crt-off');
+          const ln = document.querySelector('.crt-line'); if (ln) ln.remove();
+          power.textContent = '⏻ off';
+          chord([392, 523, 659], 0.1, 'square');
+        } else {
+          document.body.classList.add('crt-off');
+          const ln = document.createElement('div');
+          ln.className = 'crt-line';
+          document.body.appendChild(ln);
+          power.textContent = '⏻ on';
+          beep(120, 0.5, 'sawtooth', 0.08);
+        }
+      });
+
+      // ===== console love note =====
+      const css1 = 'color:#ff2bd6;font-size:18px;font-weight:bold;text-shadow:2px 2px 0 #00f0ff;';
+      const css2 = 'color:#c6ff3d;font-family:monospace;';
+      console.log('%c★ welcome to the back rooms of the internet ★', css1);
+      console.log('%cyou found the console. nice. say hi: Andrew.killinger@gmail.com', css2);
+
+      // unlock audio on first user interaction (mobile)
+      const unlock = () => { ac(); document.removeEventListener('touchstart', unlock); document.removeEventListener('click', unlock); };
+      document.addEventListener('touchstart', unlock, { passive: true });
+      document.addEventListener('click', unlock);
+    </script>
+  </body>
+</html>
