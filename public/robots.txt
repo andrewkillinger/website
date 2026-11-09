@@ -1,0 +1,7 @@
+# robots.txt for andrewkillinger.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://andrewkillinger.com/sitemap.xml
